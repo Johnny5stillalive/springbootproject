@@ -55,6 +55,11 @@ public class SiteController {
 	public String consultantList() {
 		return "consultantList.html";
 	}
+	
+	@GetMapping(path="addClient")
+	public String addClientPage() {
+		return "addClient.html";
+	}
 
 	@GetMapping(path = "/getClientList")
 	public @ResponseBody Iterable<Client> getAllClients() {
@@ -73,6 +78,7 @@ public class SiteController {
 		// This returns a JSON or XML with the Consultants
 		return consultantService.listAllConsultant();
 	}
+	
 
 	@PostMapping(path = "/addClient")
 	public @ResponseBody String addNewClient(@RequestParam String name, @RequestParam String address,

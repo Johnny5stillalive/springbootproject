@@ -17,7 +17,7 @@
 	<div>
 		<h2>Here is the name list</h2>
 		<input data-ng-model="search" type="text" placeholder="Search">
-		<input type="button" value="Add Client" />
+		<a href="addClient"> <input type="button" value="Add Client" /></a>
 		<ul class="list-group w-50">
 			<li class="list-group-item"
 				data-ng-repeat="client in clients | filter:search">ID:
