@@ -2,9 +2,11 @@ package com.screcruiting.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,11 +98,12 @@ public class SiteController {
 		return "Vendor Saved";
 	}
 
-	@PostMapping(path = "/deleteClient")
-	public @ResponseBody String deleteClient(@RequestParam int id) {
+	@PostMapping(path = "/deleteClient" )
+	public @ResponseBody String deleteClient(@RequestBody Client client) {
 		// TODO make sure the client exists before trying to delete
-		clientService.deleteClient(id);
-		return "Client " + id + " deleted.";
+		
+		clientService.deleteClient(client.getId());
+		return "Client " + client.getId() + " deleted.";
 	}
 
 	@PostMapping(path = "/deleteConsultant")
@@ -117,9 +120,14 @@ public class SiteController {
 		return "Vendor " + id + " deleted.";
 	}
 
-	// TODO update entities, add resume, add resume submission ,
-	// get resumes, get resume submissions, get resume by id, get clients by resume
-	// submission
+	// TODO add resume, add resume submission ,
+	// get resume list, get resume submissions, get resume by id, get clients by resume
+	// , list of clients with vendor
+	// list of consultants with vendor
+	
+	
+	//TODO Get a list of resumes by consultant id
+	//TODO Get a list of resumeSubmission for resume ID
 
 	@GetMapping(path = "/getClientById")
 	public @ResponseBody Client getClientByID(@RequestParam int id) {

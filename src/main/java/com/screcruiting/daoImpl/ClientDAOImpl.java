@@ -36,12 +36,12 @@ public class ClientDAOImpl implements ClientDAO{
 	}
 
 
+	
 	@Override
 	public Client getClientByID(int id) {
 		try {
 			return clientRepository.findById(id).get();
 		} catch (RuntimeException e) {
-			
 			e.printStackTrace();
 			return null;
 		}

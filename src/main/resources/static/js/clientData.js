@@ -1,30 +1,32 @@
 angular.module('clientAPP')
 	.controller('clientController', function($scope, $http) {
+		var onPostSuccess = function(data, status, headers, config) {
+			$scope.data = data;
+		};
+
+		var onPostError = function(data, status, headers, config) {
+			$scope.error = status;
+		}
+
 		$scope.deleteClient = function(id) {
 			var data = {
 				id: id
 			};
 
 			//Call the services
-
-			$http.post('http://localhost:8080/deleteClient', JSON.stringify(data)).then(function(response) {
-
-				if (response.data)
-
-					$scope.msg = "Client" + id + " deleted !";
-
-			}, function(response) {
-
-				$scope.msg = "Client delete failed";
-
-			});
-
+			$http.post('/deleteClient', data)
+				.success(onPostSuccess)
+				.error(onPostError);
 		};
 
-	
 
-$http.get('http://localhost:8080/getClientList').
-	then(function(response) {
-		$scope.clients = response.data;
+		var onGetSuccess = function(data, status, headers, config) {
+			$scope.clients = data;
+		};
+
+		var onGetError = function(data, status, headers, config) {
+			$scope.error = status;
+		}
+
+		$http.get('http://localhost:8080/getClientList').success(onGetSuccess).error(onGetError);
 	});
-		});

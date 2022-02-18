@@ -24,8 +24,9 @@
 					{{client.id}}, Name: {{client.name}}, Contact Info:
 					{{client.contactInfo}}, address: {{client.address}}
 					
-						  <input type="button" data-ng-click="deleteClient({{client.id}})" class="btn btn-primary btn-sm" value="View Related Vendors" /> <input
-							type="button" class="btn btn-secondary btn-sm" value="Edit" /> <input type="button" class="btn btn-danger btn-sm"
+						  <input type="button"  class="btn btn-primary btn-sm" value="View Related Vendors" />
+						   <input type="button" class="btn btn-secondary btn-sm" value="Edit" /> 
+							<input type="button" data-ng-click="deleteClient(client.id)" class="btn btn-danger btn-sm"
 							value="delete" />
 					
 			</li>
