@@ -1,12 +1,10 @@
 package com.screcruiting.daoImpl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.screcruiting.dao.ConsultantDAO;
-import com.screcruiting.demo.entity.Client;
 import com.screcruiting.demo.entity.Consultant;
 import com.screcruiting.demo.repository.ConsultantRepository;
 

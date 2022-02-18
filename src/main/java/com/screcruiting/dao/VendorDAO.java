@@ -8,4 +8,5 @@ public interface VendorDAO {
 	Iterable<Vendor> listAllVendor();
 	void deleteVendor(int id);
 	Vendor getVendorByID(int id);
+	
 }

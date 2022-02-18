@@ -122,8 +122,8 @@ public class SiteController {
 
 	// TODO add resume, add resume submission ,
 	// get resume list, get resume submissions, get resume by id, get clients by resume
-	// , list of clients with vendor
-	// list of consultants with vendor
+	// get list of clients with vendor
+	// get list of consultants with vendor
 	
 	
 	//TODO Get a list of resumes by consultant id
