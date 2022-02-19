@@ -7,8 +7,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-	<script src="/js/clientModule.js"></script>
-<script src="/js/clientData.js"></script>
+	<script src="/js/vendorModule.js"></script>
+<script src="/js/vendorData.js"></script>
 </head>
 <body>
 <form >
@@ -30,7 +30,7 @@
       <input type="text" class="form-control" id="contactInfo" placeholder="Contact Info">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" data-ng-click="addClient(inputName,inputAddress,contactInfo.value)">Add Client</button>
+  <button type="submit" class="btn btn-primary" data-ng-click="addVendor(inputName,inputAddress,contactInfo.value)">Add Vendor</button>
 </form>
 
 </body>

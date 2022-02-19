@@ -1,8 +1,8 @@
-angular.module('clientAPP')
-	.controller('clientController', function($scope, $http) {
+angular.module('consultantAPP')
+	.controller('consultantController', function($scope, $http) {
 		
 
-		$scope.deleteClient = function(id) {
+		$scope.deleteConsultant = function(id) {
 			var data = {
 				id:id
 			};
@@ -18,12 +18,12 @@ angular.module('clientAPP')
 		}
 			
 			//Call the services
-			$http.post('/deleteClient', data)
+			$http.post('/deleteConsultant', data)
 				.success(onPostError)
 				.error(onPostError);
 		};
 		
-		$scope.addClient = function(name, address, contactInfo) {
+		$scope.addConsultant = function(name, address, contactInfo) {
 			var data = 
 			{
 				name: name,
@@ -34,19 +34,19 @@ angular.module('clientAPP')
 			
 
 			//Call the services
-			$http.post('/addNewClient', data)
+			$http.post('/addNewConsultant', data)
 				.success(onPostSuccess)
 				.error(onPostError);
 		};
 
 
 		var onGetSuccess = function(data, status, headers, config) {
-			$scope.clients = data;
+			$scope.consultants = data;
 		};
 
 		var onGetError = function(data, status, headers, config) {
 			$scope.error = status;
 		}
 
-		$http.get('http://localhost:8080/getClientList').success(onGetSuccess).error(onGetError);
+		$http.get('http://localhost:8080/getConsultantList').success(onGetSuccess).error(onGetError);
 	});

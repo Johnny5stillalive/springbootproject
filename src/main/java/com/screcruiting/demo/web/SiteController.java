@@ -56,9 +56,19 @@ public class SiteController {
 		return "consultantList.html";
 	}
 	
-	@GetMapping(path="addClient")
+	@GetMapping(path="/addClient")
 	public String addClientPage() {
 		return "addClient.html";
+	}
+	
+	@GetMapping(path="/addVendor")
+	public String addVendorPage() {
+		return "addVendor.html";
+	}
+	
+	@GetMapping(path="/addConsultant")
+	public String addConsultantPage() {
+		return "addConsultant.html";
 	}
 
 	@GetMapping(path = "/getClientList")
@@ -80,7 +90,7 @@ public class SiteController {
 	}
 	
 
-	@PostMapping(path = "/addClient")
+	@PostMapping(path = "/addNewClient")
 	public @ResponseBody String addNewClient(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
 
@@ -88,7 +98,7 @@ public class SiteController {
 		return "Client Saved";
 	}
 
-	@PostMapping(path = "/addConsultant")
+	@PostMapping(path = "/addNewConsultant")
 	public @ResponseBody String addNewConsultant(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
 
@@ -96,7 +106,7 @@ public class SiteController {
 		return "Consultant Saved";
 	}
 
-	@PostMapping(path = "/addVendor")
+	@PostMapping(path = "/addNewVendor")
 	public @ResponseBody String addNewVendor(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
 
@@ -109,6 +119,7 @@ public class SiteController {
 		// TODO make sure the client exists before trying to delete
 		
 		clientService.deleteClient(client.getId());
+		System.out.println("deleted");
 		return "Client " + client.getId() + " deleted.";
 	}
 

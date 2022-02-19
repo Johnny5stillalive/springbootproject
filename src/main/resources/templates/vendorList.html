@@ -1,15 +1,65 @@
 <!doctype html>
-<html >
-	<head>
-		<title>Vendor List</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	
-	</head>
+<html lang="en" data-ng-app="vendorAPP">
+<head>
+<title>Vendor Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 
-	<body >
-		<div >
-			<h2>Here is the name list</h2>
+<script src="/js/vendorModule.js"></script>
+<script src="/js/vendorData.js"></script>
+<script src="/js/script.js"></script>
+
+</head>
+<body>
+
+	<div class="header">
+		<h1>
+			<span>Some Company</span>
+		</h1>
+	</div>
 	
-		</div>
-	</body>
+	<div data-ng-controller="vendorController" >
+<div id="navbar_top">
+	<div class="navbar">
+		<a href="/homePage" >Home</a> <a href="/clientList">Clients</a>
+		<a href="/consultantList">Consultants</a> <a href="/vendorList" class="active">Vendors</a>
+		<a href="/" class="right" >Logout</a>
+	</div>
+
+	<div class="text-center p-2">
+		
+		 <input
+			data-ng-model="search" type="text" placeholder="Search">
+			<a href="addVendor"> <input type="button" value="Add Vendor" /></a>
+			</div>
+			</div>
+		<ul class="w3-ul w3-card-4 w3-hoverable">
+			<li data-ng-repeat="vendor in vendors | filter:search" ><span><b>ID:
+				</b> {{vendor.id}}</span> <b>Name: </b> {{vendor.name}} <b>Contact Info: </b>
+				{{vendor.contactInfo}} <b> address:</b> {{vendor.address}}
+				 <span class="float-end">
+			<input type="button" class="btn btn-primary btn-sm "
+				value="Related Vendors" /> <input type="button" class="btn btn-primary btn-sm"
+				value="Related Consultants" />  <input type="button"
+				class="btn btn-secondary btn-sm" value="Edit" /> <input
+				type="button" data-ng-click="deleteVendor(vendor.id)"
+				class="btn btn-danger btn-sm" value="delete" /></span> </li>
+		</ul>
+	</div>
+
+	<div class="footer">
+		<h4>Disclaimer: We are in no way responsible for any injuries
+			during training. Any burns, physical trauma, emotional trauma, loss of
+			limbs and/or sight are not our responsibility. Please be Advised.</h4>
+	</div>
+
+</body>
 </html>
