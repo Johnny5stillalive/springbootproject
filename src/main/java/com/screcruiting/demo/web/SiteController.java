@@ -2,7 +2,6 @@ package com.screcruiting.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +69,11 @@ public class SiteController {
 	public String addConsultantPage() {
 		return "addConsultant.html";
 	}
+	
+	@GetMapping(path="/consultantResumeList/{consultantID}")
+	public String consultantResumeList() {
+		return "consultantResumeList.html";
+	}
 
 	@GetMapping(path = "/getClientList")
 	public @ResponseBody Iterable<Client> getAllClients() {
@@ -93,9 +97,9 @@ public class SiteController {
 	@PostMapping(path = "/addNewClient")
 	public @ResponseBody String addNewClient(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
-
+System.out.println(name + address + contactInfo);
 		clientService.saveClient(name, address, contactInfo);
-		return "Client Saved";
+		return "New Client Saved";
 	}
 
 	@PostMapping(path = "/addNewConsultant")
@@ -115,12 +119,13 @@ public class SiteController {
 	}
 
 	@PostMapping(path = "/deleteClient" )
-	public @ResponseBody String deleteClient(@RequestBody Client client) {
+	public String deleteClient(@RequestBody Client client) {
 		// TODO make sure the client exists before trying to delete
 		
 		clientService.deleteClient(client.getId());
-		System.out.println("deleted");
-		return "Client " + client.getId() + " deleted.";
+		System.out.println("deleted");	
+		
+		return "Client " + client.getId() + " deleted."  ;
 	}
 
 	@PostMapping(path = "/deleteConsultant")

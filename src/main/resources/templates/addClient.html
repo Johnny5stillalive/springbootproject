@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" data-ng-app="clientAPP">
 <head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -10,27 +11,30 @@
 	<script src="/js/clientModule.js"></script>
 <script src="/js/clientData.js"></script>
 </head>
-<body>
+<body data-ng-controller="clientController">
 <form >
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Name" >
+      <input type="text" class="form-control" data-ng-model="inputName" placeholder="Name" >
     </div>
 </div>
 <div class="form-row">
   <div class="form-group col-md-6">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" data-ng-model="inputAddress" placeholder="1234 Main St">
   </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="contactInfo">Contact Info</label>
-      <input type="text" class="form-control" id="contactInfo" placeholder="Contact Info">
+      <input type="text" class="form-control" data-ng-model="contactInfo" placeholder="Contact Info">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" data-ng-click="addClient(inputName,inputAddress,contactInfo.value)">Add Client</button>
+  <input type="button" class="btn btn-primary" data-ng-click="addClient(inputName, inputAddress, contactInfo)" value="Add Client" />
+  <a href="/clientList" class="active"><input type="button" class="btn btn-secondary" value="Client List"/></a>
 </form>
 
+{{message}}
 </body>
+</html>

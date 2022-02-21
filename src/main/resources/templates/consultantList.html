@@ -46,8 +46,8 @@
 				<span><b>ID: </b> {{consultant.id}}</span> <b>Name: </b>
 				{{consultant.name}} <b>Contact Info: </b> {{consultant.contactInfo}}
 				<b> address:</b> {{consultant.address}} <span class="float-end">
-					<input type="button" class="btn btn-primary btn-sm"
-					value="View Resumes" /> <input type="button"
+					<a href="consultantResumeList/{{consultant.id}}"><input type="button" class="btn btn-primary btn-sm"
+					value="View Resumes" /></a> <input type="button"
 					class="btn btn-primary btn-sm" value="Related Vendors" /> <input
 					type="button" class="btn btn-secondary btn-sm" value="Edit" /> <input
 					type="button" data-ng-click="deleteConsultant(consultant.id)"

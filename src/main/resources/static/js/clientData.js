@@ -1,13 +1,7 @@
 angular.module('clientAPP')
 	.controller('clientController', function($scope, $http) {
 		
-
-		$scope.deleteClient = function(id) {
-			var data = {
-				id:id
-			};
-			
-			var onPostSuccess = function(data, status, headers, config) {
+var onPostSuccess = function(data, status, headers, config) {
 			$scope.data = data;
 			window.location.reload()
 		};
@@ -15,7 +9,13 @@ angular.module('clientAPP')
 		var onPostError = function(data, status, headers, config) {
 			$scope.error = status;
 			window.location.reload()
-		}
+		};
+
+		$scope.deleteClient = function(id) {
+			
+			var data = {
+				id:id
+			};
 			
 			//Call the services
 			$http.post('/deleteClient', data)
@@ -23,18 +23,18 @@ angular.module('clientAPP')
 				.error(onPostError);
 		};
 		
-		$scope.addClient = function(name, address, contactInfo) {
+		$scope.addClient = function(inputName, inputAddress, inputContactInfo) {
+			
 			var data = 
 			{
-				name: name,
-				adress: address,
-				contactInfo: contactInfo
+				name: inputName,
+				address: inputAddress,
+				contactInfo: inputContactInfo
 			};
-			
 			
 
 			//Call the services
-			$http.post('/addNewClient', data)
+			$http.post('/addNewClient', null, {params:data})
 				.success(onPostSuccess)
 				.error(onPostError);
 		};
