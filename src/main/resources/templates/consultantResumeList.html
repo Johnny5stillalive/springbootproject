@@ -23,25 +23,36 @@
 	<div class="text-center p-2">
 
 		<input data-ng-model="search" type="text" placeholder="Search">
-		<a href="addResume/{{consultantId}}"> <input type="button" value="Add Resume" /></a>
+		<a href="addResume/{{consultantId}}"> <input type="button"
+			value="Add Resume" /></a>
 
 	</div>
 	<ul class="w3-ul w3-card-4 w3-hoverable">
-		<li data-ng-repeat="resume in resumes | filter:search"><span><b>ID:
-			</b> {{resume.id}}</span> <b>Type: </b> {{resume.type}} <b>Content: </b>
-			{{resume.content}} <span class="float-end"> <Label class="px-2">View Submissions</Label><input class="px-2" type="checkbox" data-ng-model="myVar">
-			<a href="addSubmission/{{resume.id}}"><input type="button" class="btn btn-primary btn-sm mx-2" data-ng-onClick="/addSubmission/{{resume.id}}" value="Add Submissions" /></a>
-			 <input
-					type="button" data-ng-click="deleteResume(resume.id)"
-					class="btn btn-danger btn-sm" value="delete" />
+		<li
+			data-ng-repeat="resume in resumes | filter:search | filter: resume.consultantIntID = consultantId">
+			</span><span><b>ID: </b> {{resume.id}}</span> <b>Type: </b> {{resume.type}}
+			<b>Content: </b> {{resume.content}} <span class="float-end"> <b>Submissions Count:
+		</b> {{resume.submissions.length}} <Label
+				class="px-2">View Submissions</Label><input class="px-2"
+				type="checkbox" data-ng-model="myVar"> <a
+				href="addSubmission/{{resume.id}}"><input type="button"
+					class="btn btn-primary btn-sm mx-2"
+					data-ng-onClick="/addSubmission/{{resume.id}}"
+					value="Add Submissions" /></a> <input type="button"
+				data-ng-click="deleteResume(resume.id)"
+				class="btn btn-danger btn-sm" value="delete" />
 		</span>
 			<div>
 				<ul>
 					<li data-ng-hide="!myVar"
-						data-ng-repeat="resumeSubs in resume.submissions | filter:search"><span><b>Date:
-			</b> {{resumeSubs.date}} <b>Client: </b>{{resumeSubs.clientName}}<b>  Vendor: </b> {{resumeSubs.vendorName}}</span></li>
+						data-ng-repeat="resumeSubs in resume.submissions | filter:search">
+						<b> Client: </b>{{resumeSubs.clientName}}<b> Vendor: </b>
+						{{resumeSubs.vendorName}}</span> <span><b> Date: </b>
+							{{resumeSubs.date}} 
+					</li>
 				</ul>
-			</div></li>
+			</div>
+		</li>
 	</ul>
 </body>
 </html>

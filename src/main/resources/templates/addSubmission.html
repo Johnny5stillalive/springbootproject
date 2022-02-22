@@ -17,45 +17,51 @@
 </head>
 
 <body data-ng-controller="MainCtrl">
-<div class="container">
-<form >
+	<div class="container">
+		<form>
 
-<label>Select A Client</label>
-	<div class="form-row">
-    <div class="form-group col-md-6">
-    
-    <select name="clients" data-ng-model="clientSelect">
+			<label>Select A Client</label>
+			<div class="form-row">
+				<div class="form-group col-md-6">
 
-<option value="">--Select Client--</option>
+					<select name="clients" data-ng-model="clientSelect">
 
-<option data-ng-repeat="client in clientsList"  value="{{client.id}}">{{client.name}}</option>
+						<option value="">--Select Client--</option>
 
-</select>
-      
-    </div>
-</div>
-<label>Select A Vendor</label>
-<div class="form-row">
-  <div class="form-group col-md-6">
-    <select name="vendors" data-ng-model="vendorSelect">
+						<option data-ng-repeat="client in clientsList"
+							value="{{client.id}}">{{client.name}}</option>
 
-<option value="">--Select Vendor-</option>
+					</select>
 
-<option data-ng-repeat="vendor in vendorList"  value="{{vendor.id}}">{{vendor.name}}</option>
+				</div>
+			</div>
+			<label>Select A Vendor</label>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<select name="vendors" data-ng-model="vendorSelect">
 
-</select>
-  </div>
-  </div>
-  <div class="form-row">
-  <div class="form-group col-md-6">
-  <label for="input">Choose date of Submission</label>
-    <input type="date" id="input" class="form-control" data-ng-model="inputDate">
-  
-  </div>
-  </div>
-  <button type="submit" class="btn btn-primary" data-ng-click="addSubmission(clientSelect, vendorSelect, inputDate)">Add Submission</button>
-  <a href="/consultantList" class="active"><input type="button" class="btn btn-secondary" value="Consultant List"/></a>
-</form>
-</div>
+						<option value="">--Select Vendor-</option>
+
+						<option data-ng-repeat="vendor in vendorList"
+							value="{{vendor.id}}">{{vendor.name}}</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="input">Choose date of Submission</label> <input
+						type="date" id="input" class="form-control"
+						data-ng-model="inputDate">
+
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary"
+				data-ng-click="addSubmission(clientSelect, vendorSelect, inputDate)">Add
+				Submission</button>
+			<a href="/consultantList" class="active"><input type="button"
+				class="btn btn-secondary" value="Consultant List" /></a>
+		</form>
+	</div>
 </body>
 </html>

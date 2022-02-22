@@ -276,7 +276,7 @@ public class SiteController {
 	@PostMapping(path = "/addResumeSubmission")
 	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam String date, @RequestParam int vendorID,
 			@RequestParam int clientID) {
-		System.out.println(date);
+		
 		Date sqlDate = Date.valueOf(date);
 		Resume resume = resumeService.getResumeById(resumeID);
 		Vendor vendor = vendorService.getVendorById(vendorID);

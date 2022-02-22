@@ -1,6 +1,5 @@
 package com.screcruiting.demo.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,10 +41,13 @@ public class Resume
 	private Consultant consultant;
 	
 	
+	private int consultantIntID;
+	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="resume", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ResumeSubmission> submissions;
 
+	
 	/*
 	//First name, last name? Let's keep it simple for now as whatever they want..
 	@Column(name ="NAME")
@@ -110,6 +111,14 @@ public class Resume
 
 	public void setSubmissions(List<ResumeSubmission> submissions) {
 		this.submissions = submissions;
+	}
+
+	public int getConsultantIntID() {
+		return consultantIntID;
+	}
+
+	public void setConsultantIntID(int consultantIntID) {
+		this.consultantIntID = consultantIntID;
 	}
 	
 }

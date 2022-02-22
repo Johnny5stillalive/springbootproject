@@ -44,8 +44,7 @@ app.controller('MainCtrl', function($scope, $http, $location) {
 		$scope.addSubmission = function(clientSelect, vendorSelect, inputDate){
 			let date = JSON.stringify(inputDate)
 date = date.slice(1,11)
-			alert(inputDate);
-			alert(date);
+			
 		var data = 
 			{
 				resumeID: $scope.consultantId,

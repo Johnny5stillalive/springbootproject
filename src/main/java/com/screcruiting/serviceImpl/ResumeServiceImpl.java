@@ -20,6 +20,7 @@ public class ResumeServiceImpl implements ResumeService {
 		newResume.setConsultant(consultant);
 		newResume.setType(type);
 		newResume.setContent(content);
+		newResume.setConsultantIntID(consultant.getId());
 		resumeDAO.saveOrUpdateResume(newResume);
 		
 	}
