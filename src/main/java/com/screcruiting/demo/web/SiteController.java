@@ -1,5 +1,7 @@
 package com.screcruiting.demo.web;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -32,10 +34,10 @@ public class SiteController {
 
 	@Autowired
 	private ConsultantService consultantService;
-	
+
 	@Autowired
 	private ResumeService resumeService;
-	
+
 	@Autowired
 	private ResumeSubmissionService resumeSubmissionService;
 
@@ -63,37 +65,36 @@ public class SiteController {
 	public String consultantList() {
 		return "consultantList.html";
 	}
-	
-	@GetMapping(path="/addClient")
+
+	@GetMapping(path = "/addClient")
 	public String addClientPage() {
 		return "addClient.html";
 	}
-	
-	@GetMapping(path="/addVendor")
+
+	@GetMapping(path = "/addVendor")
 	public String addVendorPage() {
 		return "addVendor.html";
 	}
-	
-	@GetMapping(path="/addConsultant")
+
+	@GetMapping(path = "/addConsultant")
 	public String addConsultantPage() {
 		return "addConsultant.html";
 	}
-	
-	@GetMapping(path="/consultantResumeList/{consultantID}")
+
+	@GetMapping(path = "/consultantResumeList/{consultantID}")
 	public String consultantResumeList() {
 		return "consultantResumeList.html";
 	}
-	
-	@GetMapping(path="/consultantResumeList/addResume/{consultantID}")
+
+	@GetMapping(path = "/consultantResumeList/addResume/{consultantID}")
 	public String addResume() {
 		return "addResume.html";
 	}
-	
-	@GetMapping(path="/consultantResumeList/addSubmission/{resumeId}")
+
+	@GetMapping(path = "/consultantResumeList/addSubmission/{resumeId}")
 	public String addResumeSubmission() {
 		return "addSubmission.html";
 	}
-
 
 	/////////////////////////////////////////////////////////////
 	// ------------------------GET LIST------------------------//
@@ -116,21 +117,21 @@ public class SiteController {
 		// This returns a JSON or XML with the Consultants
 		return consultantService.listAllConsultant();
 	}
-	
+
 	@GetMapping(path = "/getResumeList")
 	public @ResponseBody Iterable<Resume> getAllResumes() {
 		// This returns a JSON or XML with the Clients
 		return resumeService.listAllResume();
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// ------------------------ADD NEW-------------------------//
 	/////////////////////////////////////////////////////////////
-	
+
 	@PostMapping(path = "/addNewClient")
 	public @ResponseBody String addNewClient(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
-System.out.println(name + address + contactInfo);
+		System.out.println(name + address + contactInfo);
 		clientService.saveClient(name, address, contactInfo);
 		return "New Client Saved";
 	}
@@ -150,19 +151,20 @@ System.out.println(name + address + contactInfo);
 		vendorService.add(name, address, contactInfo);
 		return "Vendor Saved";
 	}
-	
-	@PostMapping(path = "/addResume")
-	public @ResponseBody String addNewResume(@RequestParam String type, @RequestParam String content) {
 
-		resumeService.saveResume(type, content);
+	@PostMapping(path = "/addResume")
+	public @ResponseBody String addNewResume(@RequestParam int consultantID, @RequestParam String type,
+			@RequestParam String content) {
+		Consultant consultant = consultantService.getConsultantById(consultantID);
+
+		resumeService.saveResume(consultant, type, content);
 		return "Resume Saved";
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// -------------------------DELETE-------------------------//
 	/////////////////////////////////////////////////////////////
 
-	
 	@PostMapping(path = "/deleteClient")
 	public @ResponseBody String deleteClient(@RequestParam int id) {
 		// TODO make sure the consultant exists before trying to delete
@@ -187,23 +189,22 @@ System.out.println(name + address + contactInfo);
 	@PostMapping(path = "/deleteResume")
 	public @ResponseBody String deleteResume(@RequestParam int id) {
 		// TODO make sure the Resume exists before trying to delete
-		vendorService.deleteVendor(id);
+		resumeService.deleteResume(id);
 		return "Resume " + id + " deleted.";
 	}
-	
-	// TODO 
+
+	// TODO
 	// get clients by resume
 	// get list of clients with vendor
 	// get list of consultants with vendor
-	
-	
-	//TODO Get a list of resumes by consultant id
-	//TODO Get a list of resumeSubmission for resume ID
+
+	// TODO Get a list of resumes by consultant id
+	// TODO Get a list of resumeSubmission for resume ID
 
 	/////////////////////////////////////////////////////////////
 	// -----------------------GET BY ID------------------------//
 	/////////////////////////////////////////////////////////////
-	
+
 	@GetMapping(path = "/getClientById")
 	public @ResponseBody Client getClientByID(@RequestParam int id) {
 		return clientService.getClientById(id);
@@ -221,18 +222,17 @@ System.out.println(name + address + contactInfo);
 		return vendorService.getVendorById(id);
 
 	}
-	
+
 	@GetMapping(path = "/getResumeById")
 	public @ResponseBody Resume getResumeByID(@RequestParam int id) {
 		return resumeService.getResumeById(id);
 
 	}
 
-	
 	/////////////////////////////////////////////////////////////
 	// -------------------------UPDATE-------------------------//
 	/////////////////////////////////////////////////////////////
-	
+
 	@PostMapping(path = "/updateClient")
 	public @ResponseBody String updateClient(@RequestParam int id, @RequestParam String name,
 			@RequestParam String address, @RequestParam String contactInfo) {
@@ -256,7 +256,7 @@ System.out.println(name + address + contactInfo);
 		return vendorService.updateVendor(id, name, address, contactInfo);
 
 	}
-	
+
 	@PostMapping(path = "/updateResume")
 	public @ResponseBody String updateResume(@RequestParam int id, @RequestParam String type,
 			@RequestParam String content) {
@@ -264,8 +264,7 @@ System.out.println(name + address + contactInfo);
 		return resumeService.updateResume(id, type, content);
 
 	}
-	
-	
+
 	/////////////////////////////////////////////////////////////
 	// ----------------RESUMESUBMISSION METHODS----------------//
 	/////////////////////////////////////////////////////////////
@@ -273,42 +272,43 @@ System.out.println(name + address + contactInfo);
 	public @ResponseBody Iterable<ResumeSubmission> getAllResumeSubmissions() {
 		return resumeSubmissionService.listAllResumeSubmission();
 	}
-	
-	@PostMapping(path = "/addResumeSubmission")
-	public @ResponseBody String addNewResumeSubmission(@RequestParam Resume resume, @RequestParam Vendor vendor, 
-			@RequestParam Client client) {
 
-		resumeSubmissionService.saveResumeSubmission(resume, vendor, client);
+	@PostMapping(path = "/addResumeSubmission")
+	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam Date date, @RequestParam int vendorID,
+			@RequestParam int clientID) {
+		Resume resume = resumeService.getResumeById(resumeID);
+		Vendor vendor = vendorService.getVendorById(vendorID);
+		Client client = clientService.getClientById(clientID);
+
+		resumeSubmissionService.saveResumeSubmission(resume, date, vendor, client);
 		return "Resume Submission Saved";
 	}
-	
+
 	@GetMapping(path = "/getResumeSubmissionById")
 	public @ResponseBody ResumeSubmission getResumeSubmissionByID(@RequestParam int id) {
 		return resumeSubmissionService.getResumeSubmissionById(id);
 
 	}
-	
+
 	@PostMapping(path = "/updateResumeSubmission")
-	public @ResponseBody String updateResumeSubmission(@RequestParam int id, @RequestParam Resume resume, 
+	public @ResponseBody String updateResumeSubmission(@RequestParam int id, @RequestParam Resume resume,
 			@RequestParam Vendor vendor, @RequestParam Client client) {
 
 		return resumeSubmissionService.updateResumeSubmission(id, resume, vendor, client);
 
 	}
-	
+
 	@PostMapping(path = "/deleteResumeSubmission")
 	public @ResponseBody String deleteResumeSubmission(@RequestParam int id) {
 		// TODO make sure the vendor exists before trying to delete
 		resumeSubmissionService.deleteResumeSubmission(id);
 		return "ResumeSubmission " + id + " deleted.";
 	}
-	
-	
+
 	/////////////////////////////////////////////////////////////
 	// -------------------SPECIALIZED METHODS------------------//
 	/////////////////////////////////////////////////////////////
 
-	
 	// Not finished at alllllll
 	@GetMapping(path = "/getAllClientByResumeID")
 	public @ResponseBody Iterable<Client> getAllClientByResumeId(@RequestParam int id) {

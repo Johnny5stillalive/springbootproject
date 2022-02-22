@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="RESUME")
@@ -35,10 +37,11 @@ public class Resume
 	@Column(name="CONTENT")
 	private String content;
 	
-	//@MapsId
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CONSULTANT_ID")
 	private Consultant consultant;
+	
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="resume", cascade=CascadeType.ALL, fetch = FetchType.LAZY)

@@ -1,5 +1,7 @@
 package com.screcruiting.serviceImpl;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,14 @@ public class ResumeSubmissionServiceImpl implements ResumeSubmissionService {
 	private ResumeSubmissionDAO resumeSubmissionDAO;
 		
 	@Override
-	public void saveResumeSubmission(Resume resume, Vendor vendor, Client client) {
+	public void saveResumeSubmission(Resume resume, Date date, Vendor vendor, Client client) {
 		ResumeSubmission newResumeSubmission = new ResumeSubmission();
 		newResumeSubmission.setResume(resume);
+		newResumeSubmission.setDate(date);
 		newResumeSubmission.setVendor(vendor);
 		newResumeSubmission.setClient(client);
+		newResumeSubmission.setClientName(client.getName());
+		newResumeSubmission.setVendorName(vendor.getName());
 		resumeSubmissionDAO.saveOrUpdateResumeSubmission(newResumeSubmission);
 		
 	}

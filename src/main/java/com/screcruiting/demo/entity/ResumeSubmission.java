@@ -14,6 +14,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="RESUME_SUBMISSION")
@@ -24,12 +26,12 @@ public class ResumeSubmission {
 	@Column(name="RESUME_SUBMISSION_ID")
 	private Integer id;
 	
-	//@MapsId
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="RESUME_ID")
 	private Resume resume;
 	
-	//@MapsId
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CLIENT_ID")
 	private Client client;
@@ -37,15 +39,24 @@ public class ResumeSubmission {
 	@Column(name="DATE")
 	private Date date;
 
-	//@MapsId
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "VENDOR_ID")
 	private Vendor vendor;
+	
+	private String vendorName;
+	
+	private String clientName;
+	
+	
+	
 
 	/////////////////////////////////////////////////////////////
 	// -------------------GETTERS AND SETTERS------------------//
 	/////////////////////////////////////////////////////////////
 	
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -85,6 +96,24 @@ public class ResumeSubmission {
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
 	}
+
+	public String getVendorName() {
+		return vendorName;
+	}
+
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+
 	
 	
 }	

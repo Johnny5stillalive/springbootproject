@@ -38,8 +38,8 @@
 			<div>
 				<ul>
 					<li data-ng-hide="!myVar"
-						data-ng-repeat="resumeSubs in resume.submissions | filter:search"><span><b>Name:
-			</b> {{resumeSubs.name}}</span></li>
+						data-ng-repeat="resumeSubs in resume.submissions | filter:search"><span><b>Date:
+			</b> {{resumeSubs.date}} <b>Client: </b>{{resumeSubs.clientName}}<b>  Vendor: </b> {{resumeSubs.vendorName}}</span></li>
 				</ul>
 			</div></li>
 	</ul>

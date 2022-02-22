@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.screcruiting.dao.ResumeDAO;
+import com.screcruiting.demo.entity.Consultant;
 import com.screcruiting.demo.entity.Resume;
 import com.screcruiting.demo.service.ResumeService;
 
@@ -14,8 +15,9 @@ public class ResumeServiceImpl implements ResumeService {
 	private ResumeDAO resumeDAO;
 	
 	@Override
-	public void saveResume(String type, String content) {
+	public void saveResume(Consultant consultant, String type, String content) {
 		Resume newResume = new Resume();
+		newResume.setConsultant(consultant);
 		newResume.setType(type);
 		newResume.setContent(content);
 		resumeDAO.saveOrUpdateResume(newResume);

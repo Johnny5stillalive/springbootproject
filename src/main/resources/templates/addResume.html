@@ -30,7 +30,7 @@
     <input type="text" class="form-control" data-ng-model="inputContent" placeholder="Content">
   </div>
   </div>
-  <button type="submit" class="btn btn-primary" data-ng-click="addResume(inputName, inputAddress, consultantId)">Add Resume</button>
+  <button type="submit" class="btn btn-primary" data-ng-click="addResume(consultantId, inputType, inputContent)">Add Resume</button>
   <a href="/consultantResumeList/{{consultantId}}" class="active"><input type="button" class="btn btn-secondary" value="Consultant Resume List"/></a>
 </form>
 </body>
