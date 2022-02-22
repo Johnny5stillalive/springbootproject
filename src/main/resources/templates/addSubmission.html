@@ -24,11 +24,11 @@
 	<div class="form-row">
     <div class="form-group col-md-6">
     
-    <select name="clients">
+    <select name="clients" data-ng-model="clientSelect">
 
 <option value="">--Select Client--</option>
 
-<option data-ng-repeat="client in clientsList" data-ng-model="clientSelect" value="{{client.id}}">{{client.name}}</option>
+<option data-ng-repeat="client in clientsList"  value="{{client.id}}">{{client.name}}</option>
 
 </select>
       
@@ -37,11 +37,11 @@
 <label>Select A Vendor</label>
 <div class="form-row">
   <div class="form-group col-md-6">
-    <select name="vendors">
+    <select name="vendors" data-ng-model="vendorSelect">
 
 <option value="">--Select Vendor-</option>
 
-<option data-ng-repeat="vendor in vendorList" data-ng-model="vendorSelect" value="{{vendor.id}}">{{vendor.name}}</option>
+<option data-ng-repeat="vendor in vendorList"  value="{{vendor.id}}">{{vendor.name}}</option>
 
 </select>
   </div>
@@ -54,7 +54,7 @@
   </div>
   </div>
   <button type="submit" class="btn btn-primary" data-ng-click="addSubmission(clientSelect, vendorSelect, inputDate)">Add Submission</button>
-  <a href="/consultantResumeList/{{consultantId}}" class="active"><input type="button" class="btn btn-secondary" value="Consultant Resume List"/></a>
+  <a href="/consultantList" class="active"><input type="button" class="btn btn-secondary" value="Consultant List"/></a>
 </form>
 </div>
 </body>

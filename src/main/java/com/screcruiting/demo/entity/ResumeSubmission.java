@@ -14,6 +14,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -36,7 +38,9 @@ public class ResumeSubmission {
 	@JoinColumn(name="CLIENT_ID")
 	private Client client;
 	
+	
 	@Column(name="DATE")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 
 	@JsonIgnore

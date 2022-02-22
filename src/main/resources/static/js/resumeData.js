@@ -3,6 +3,18 @@ var app = angular.module('myAPP', []);
 app.controller('MainCtrl', function($scope, $http, $location) {
 	$scope.consultantId = $location.absUrl().split("/").pop();
 	
+	var onGetConsultantSuccess = function(data, status, headers, config) {
+			$scope.consultant = data;
+		};
+
+		var onGetConsultantError = function(data, status, headers, config) {
+			$scope.error = status;
+		}
+	
+	
+	$http.get('http://localhost:8080/getConsultantById',{params:{id:$scope.consultantId}}).success(onGetConsultantSuccess).error(onGetConsultantError);
+	
+	
 	var onPostSuccess = function(data, status, headers, config) {
 			$scope.data = data;
 			window.location.reload()
@@ -25,6 +37,27 @@ app.controller('MainCtrl', function($scope, $http, $location) {
 
 			//Call the services
 			$http.post('/addResume', null,  {params:data})
+				.success(onPostSuccess)
+				.error(onPostError);
+		};
+		
+		$scope.addSubmission = function(clientSelect, vendorSelect, inputDate){
+			let date = JSON.stringify(inputDate)
+date = date.slice(1,11)
+			alert(inputDate);
+			alert(date);
+		var data = 
+			{
+				resumeID: $scope.consultantId,
+				date: date,
+				vendorID: vendorSelect,
+				clientID: clientSelect
+			};
+			
+			
+
+			//Call the services
+			$http.post('/addResumeSubmission', null,  {params:data})
 				.success(onPostSuccess)
 				.error(onPostError);
 		};
@@ -68,6 +101,7 @@ app.controller('MainCtrl', function($scope, $http, $location) {
 		var onGetResumeListError = function(data, status, headers, config) {
 			$scope.error = status;
 		}
+
 
 		$http.get('http://localhost:8080/getResumeList').success(onGetResumeListSuccess).error(onGetResumeListError);
 });

@@ -274,13 +274,15 @@ public class SiteController {
 	}
 
 	@PostMapping(path = "/addResumeSubmission")
-	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam Date date, @RequestParam int vendorID,
+	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam String date, @RequestParam int vendorID,
 			@RequestParam int clientID) {
+		System.out.println(date);
+		Date sqlDate = Date.valueOf(date);
 		Resume resume = resumeService.getResumeById(resumeID);
 		Vendor vendor = vendorService.getVendorById(vendorID);
 		Client client = clientService.getClientById(clientID);
 
-		resumeSubmissionService.saveResumeSubmission(resume, date, vendor, client);
+		resumeSubmissionService.saveResumeSubmission(resume, sqlDate, vendor, client);
 		return "Resume Submission Saved";
 	}
 
