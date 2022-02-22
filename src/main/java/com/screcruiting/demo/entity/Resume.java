@@ -64,4 +64,49 @@ public class Resume
 	@Column(name="ZIPCODE")
 	private String zipCode;
 	*/
+
+	/////////////////////////////////////////////////////////////
+	// -------------------GETTERS AND SETTERS------------------//
+	/////////////////////////////////////////////////////////////
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Consultant getConsultant() {
+		return consultant;
+	}
+
+	public void setConsultant(Consultant consultant) {
+		this.consultant = consultant;
+	}
+
+	public List<ResumeSubmission> getSubmissions() {
+		return submissions;
+	}
+
+	public void setSubmissions(List<ResumeSubmission> submissions) {
+		this.submissions = submissions;
+	}
+	
 }

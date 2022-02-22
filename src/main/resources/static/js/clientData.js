@@ -18,7 +18,7 @@ var onPostSuccess = function(data, status, headers, config) {
 			};
 			
 			//Call the services
-			$http.post('/deleteClient', data)
+			$http.post('/deleteClient', null, {params:data})
 				.success(onPostError)
 				.error(onPostError);
 		};

@@ -1,13 +1,7 @@
 angular.module('consultantAPP')
 	.controller('consultantController', function($scope, $http) {
 		
-
-		$scope.deleteConsultant = function(id) {
-			var data = {
-				id:id
-			};
-			
-			var onPostSuccess = function(data, status, headers, config) {
+var onPostSuccess = function(data, status, headers, config) {
 			$scope.data = data;
 			window.location.reload()
 		};
@@ -16,25 +10,31 @@ angular.module('consultantAPP')
 			$scope.error = status;
 			window.location.reload()
 		}
+		
+		$scope.deleteConsultant = function(id) {
+			var data = {
+				id:id
+			};
+			
 			
 			//Call the services
-			$http.post('/deleteConsultant', data)
+			$http.post('/deleteConsultant', null, {params:data})
 				.success(onPostError)
 				.error(onPostError);
 		};
 		
-		$scope.addConsultant = function(name, address, contactInfo) {
+		$scope.addConsultant = function(inputName, inputAddress, inputContactInfo) {
+			//alert(inputName + inputAddress);
 			var data = 
 			{
-				name: name,
-				adress: address,
-				contactInfo: contactInfo
+				name: inputName,
+				address: inputAddress,
+				contactInfo: inputContactInfo
 			};
 			
-			
-
+		
 			//Call the services
-			$http.post('/addNewConsultant', data)
+			$http.post('/addNewConsultant', null, {params:data})
 				.success(onPostSuccess)
 				.error(onPostError);
 		};

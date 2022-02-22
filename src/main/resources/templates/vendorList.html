@@ -42,8 +42,7 @@
 			</div>
 			</div>
 		<ul class="w3-ul w3-card-4 w3-hoverable">
-			<li data-ng-repeat="vendor in vendors | filter:search" ><span><b>ID:
-				</b> {{vendor.id}}</span> <b>Name: </b> {{vendor.name}} <b>Contact Info: </b>
+			<li data-ng-repeat="vendor in vendors | filter:search" > <b>Name: </b> {{vendor.name}} <b>Contact Info: </b>
 				{{vendor.contactInfo}} <b> address:</b> {{vendor.address}}
 				 <span class="float-end">
 			<input type="button" class="btn btn-primary btn-sm "
@@ -55,11 +54,6 @@
 		</ul>
 	</div>
 
-	<div class="footer">
-		<h4>Disclaimer: We are in no way responsible for any injuries
-			during training. Any burns, physical trauma, emotional trauma, loss of
-			limbs and/or sight are not our responsibility. Please be Advised.</h4>
-	</div>
 
 </body>
 </html>

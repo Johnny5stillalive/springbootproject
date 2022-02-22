@@ -41,5 +41,50 @@ public class ResumeSubmission {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "VENDOR_ID")
 	private Vendor vendor;
+
+	/////////////////////////////////////////////////////////////
+	// -------------------GETTERS AND SETTERS------------------//
+	/////////////////////////////////////////////////////////////
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+	
 	
 }	

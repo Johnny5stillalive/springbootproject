@@ -5,16 +5,19 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.screcruiting.demo.entity.Client;
 import com.screcruiting.demo.entity.Consultant;
+import com.screcruiting.demo.entity.Resume;
+import com.screcruiting.demo.entity.ResumeSubmission;
 import com.screcruiting.demo.entity.Vendor;
 import com.screcruiting.demo.service.ClientService;
 import com.screcruiting.demo.service.ConsultantService;
+import com.screcruiting.demo.service.ResumeService;
+import com.screcruiting.demo.service.ResumeSubmissionService;
 import com.screcruiting.demo.service.VendorService;
 
 @ComponentScan(basePackages = "com.screcruiting")
@@ -29,6 +32,12 @@ public class SiteController {
 
 	@Autowired
 	private ConsultantService consultantService;
+	
+	@Autowired
+	private ResumeService resumeService;
+	
+	@Autowired
+	private ResumeSubmissionService resumeSubmissionService;
 
 	@RequestMapping(path = "/login")
 	public String index(@RequestParam String name, @RequestParam String password) {
@@ -74,6 +83,21 @@ public class SiteController {
 	public String consultantResumeList() {
 		return "consultantResumeList.html";
 	}
+	
+	@GetMapping(path="/consultantResumeList/addResume/{consultantID}")
+	public String addResume() {
+		return "addResume.html";
+	}
+	
+	@GetMapping(path="/consultantResumeList/addSubmission/{resumeId}")
+	public String addResumeSubmission() {
+		return "addSubmission.html";
+	}
+
+
+	/////////////////////////////////////////////////////////////
+	// ------------------------GET LIST------------------------//
+	/////////////////////////////////////////////////////////////
 
 	@GetMapping(path = "/getClientList")
 	public @ResponseBody Iterable<Client> getAllClients() {
@@ -93,7 +117,16 @@ public class SiteController {
 		return consultantService.listAllConsultant();
 	}
 	
-
+	@GetMapping(path = "/getResumeList")
+	public @ResponseBody Iterable<Resume> getAllResumes() {
+		// This returns a JSON or XML with the Clients
+		return resumeService.listAllResume();
+	}
+	
+	/////////////////////////////////////////////////////////////
+	// ------------------------ADD NEW-------------------------//
+	/////////////////////////////////////////////////////////////
+	
 	@PostMapping(path = "/addNewClient")
 	public @ResponseBody String addNewClient(@RequestParam String name, @RequestParam String address,
 			@RequestParam String contactInfo) {
@@ -117,15 +150,24 @@ System.out.println(name + address + contactInfo);
 		vendorService.add(name, address, contactInfo);
 		return "Vendor Saved";
 	}
+	
+	@PostMapping(path = "/addResume")
+	public @ResponseBody String addNewResume(@RequestParam String type, @RequestParam String content) {
 
-	@PostMapping(path = "/deleteClient" )
-	public String deleteClient(@RequestBody Client client) {
-		// TODO make sure the client exists before trying to delete
-		
-		clientService.deleteClient(client.getId());
-		System.out.println("deleted");	
-		
-		return "Client " + client.getId() + " deleted."  ;
+		resumeService.saveResume(type, content);
+		return "Resume Saved";
+	}
+	
+	/////////////////////////////////////////////////////////////
+	// -------------------------DELETE-------------------------//
+	/////////////////////////////////////////////////////////////
+
+	
+	@PostMapping(path = "/deleteClient")
+	public @ResponseBody String deleteClient(@RequestParam int id) {
+		// TODO make sure the consultant exists before trying to delete
+		clientService.deleteClient(id);
+		return "Client " + id + " deleted.";
 	}
 
 	@PostMapping(path = "/deleteConsultant")
@@ -142,8 +184,15 @@ System.out.println(name + address + contactInfo);
 		return "Vendor " + id + " deleted.";
 	}
 
-	// TODO add resume, add resume submission ,
-	// get resume list, get resume submissions, get resume by id, get clients by resume
+	@PostMapping(path = "/deleteResume")
+	public @ResponseBody String deleteResume(@RequestParam int id) {
+		// TODO make sure the Resume exists before trying to delete
+		vendorService.deleteVendor(id);
+		return "Resume " + id + " deleted.";
+	}
+	
+	// TODO 
+	// get clients by resume
 	// get list of clients with vendor
 	// get list of consultants with vendor
 	
@@ -151,6 +200,10 @@ System.out.println(name + address + contactInfo);
 	//TODO Get a list of resumes by consultant id
 	//TODO Get a list of resumeSubmission for resume ID
 
+	/////////////////////////////////////////////////////////////
+	// -----------------------GET BY ID------------------------//
+	/////////////////////////////////////////////////////////////
+	
 	@GetMapping(path = "/getClientById")
 	public @ResponseBody Client getClientByID(@RequestParam int id) {
 		return clientService.getClientById(id);
@@ -168,7 +221,18 @@ System.out.println(name + address + contactInfo);
 		return vendorService.getVendorById(id);
 
 	}
+	
+	@GetMapping(path = "/getResumeById")
+	public @ResponseBody Resume getResumeByID(@RequestParam int id) {
+		return resumeService.getResumeById(id);
 
+	}
+
+	
+	/////////////////////////////////////////////////////////////
+	// -------------------------UPDATE-------------------------//
+	/////////////////////////////////////////////////////////////
+	
 	@PostMapping(path = "/updateClient")
 	public @ResponseBody String updateClient(@RequestParam int id, @RequestParam String name,
 			@RequestParam String address, @RequestParam String contactInfo) {
@@ -192,5 +256,62 @@ System.out.println(name + address + contactInfo);
 		return vendorService.updateVendor(id, name, address, contactInfo);
 
 	}
+	
+	@PostMapping(path = "/updateResume")
+	public @ResponseBody String updateResume(@RequestParam int id, @RequestParam String type,
+			@RequestParam String content) {
 
+		return resumeService.updateResume(id, type, content);
+
+	}
+	
+	
+	/////////////////////////////////////////////////////////////
+	// ----------------RESUMESUBMISSION METHODS----------------//
+	/////////////////////////////////////////////////////////////
+	@GetMapping(path = "/getResumeSubmissionList")
+	public @ResponseBody Iterable<ResumeSubmission> getAllResumeSubmissions() {
+		return resumeSubmissionService.listAllResumeSubmission();
+	}
+	
+	@PostMapping(path = "/addResumeSubmission")
+	public @ResponseBody String addNewResumeSubmission(@RequestParam Resume resume, @RequestParam Vendor vendor, 
+			@RequestParam Client client) {
+
+		resumeSubmissionService.saveResumeSubmission(resume, vendor, client);
+		return "Resume Submission Saved";
+	}
+	
+	@GetMapping(path = "/getResumeSubmissionById")
+	public @ResponseBody ResumeSubmission getResumeSubmissionByID(@RequestParam int id) {
+		return resumeSubmissionService.getResumeSubmissionById(id);
+
+	}
+	
+	@PostMapping(path = "/updateResumeSubmission")
+	public @ResponseBody String updateResumeSubmission(@RequestParam int id, @RequestParam Resume resume, 
+			@RequestParam Vendor vendor, @RequestParam Client client) {
+
+		return resumeSubmissionService.updateResumeSubmission(id, resume, vendor, client);
+
+	}
+	
+	@PostMapping(path = "/deleteResumeSubmission")
+	public @ResponseBody String deleteResumeSubmission(@RequestParam int id) {
+		// TODO make sure the vendor exists before trying to delete
+		resumeSubmissionService.deleteResumeSubmission(id);
+		return "ResumeSubmission " + id + " deleted.";
+	}
+	
+	
+	/////////////////////////////////////////////////////////////
+	// -------------------SPECIALIZED METHODS------------------//
+	/////////////////////////////////////////////////////////////
+
+	
+	// Not finished at alllllll
+	@GetMapping(path = "/getAllClientByResumeID")
+	public @ResponseBody Iterable<Client> getAllClientByResumeId(@RequestParam int id) {
+		return clientService.listAllClientByResumeId(id);
+	}
 }

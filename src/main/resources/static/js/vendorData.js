@@ -1,13 +1,7 @@
 angular.module('vendorAPP')
 	.controller('vendorController', function($scope, $http) {
 		
-
-		$scope.deleteVendor = function(id) {
-			var data = {
-				id:id
-			};
-			
-			var onPostSuccess = function(data, status, headers, config) {
+	var onPostSuccess = function(data, status, headers, config) {
 			$scope.data = data;
 			window.location.reload()
 		};
@@ -15,26 +9,32 @@ angular.module('vendorAPP')
 		var onPostError = function(data, status, headers, config) {
 			$scope.error = status;
 			window.location.reload()
-		}
+		};
+
+		$scope.deleteVendor = function(id) {
+			var data = {
+				id: id
+			};
 			
+		
 			//Call the services
-			$http.post('/deleteVendor', data)
+			$http.post('/deleteVendor', null, {params:data})
 				.success(onPostError)
 				.error(onPostError);
 		};
 		
-		$scope.addVendor = function(name, address, contactInfo) {
+		$scope.addVendor = function(inputName, inputAddress, inputContactInfo) {
 			var data = 
 			{
-				name: name,
-				adress: address,
-				contactInfo: contactInfo
+				name: inputName,
+				address: inputAddress,
+				contactInfo: inputContactInfo
 			};
 			
 			
 
 			//Call the services
-			$http.post('/addNewVendor', data)
+			$http.post('/addNewVendor', null,  {params:data})
 				.success(onPostSuccess)
 				.error(onPostError);
 		};

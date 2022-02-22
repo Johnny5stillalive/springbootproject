@@ -43,8 +43,7 @@
 		<div>
 		<ul class="w3-ul w3-card-4 w3-hoverable">
 			<li data-ng-repeat="consultant in consultants | filter:search">
-				<span><b>ID: </b> {{consultant.id}}</span> <b>Name: </b>
-				{{consultant.name}} <b>Contact Info: </b> {{consultant.contactInfo}}
+				 <b>Name: </b>{{consultant.name}} <b>Contact Info: </b> {{consultant.contactInfo}}
 				<b> address:</b> {{consultant.address}} <span class="float-end">
 					<a href="consultantResumeList/{{consultant.id}}"><input type="button" class="btn btn-primary btn-sm"
 					value="View Resumes" /></a> <input type="button"
@@ -57,11 +56,6 @@
 		</div>
 	</div>
 
-	<div class="footer">
-		<h4>Disclaimer: We are in no way responsible for any injuries
-			during training. Any burns, physical trauma, emotional trauma, loss
-			of limbs and/or sight are not our responsiblity. Please be Advised.</h4>
-	</div>
 
 </body>
 </html>

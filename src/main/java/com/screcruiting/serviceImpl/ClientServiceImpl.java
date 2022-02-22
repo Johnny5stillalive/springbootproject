@@ -66,6 +66,12 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 
+	@Override
+	public Iterable<Client> listAllClientByResumeId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 

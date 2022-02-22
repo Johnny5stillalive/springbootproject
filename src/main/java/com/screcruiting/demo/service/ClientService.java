@@ -13,6 +13,7 @@ public interface ClientService {
 	void deleteClient(int id);
 	Client getClientById(int id);
 	String updateClient(int id, String name, String address, String contactInfo);
+	Iterable<Client> listAllClientByResumeId(int id);
 	
 }
 
