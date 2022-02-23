@@ -46,14 +46,12 @@
 				{{vendor.contactInfo}} <b> address:</b> {{vendor.address}}
 				 <span class="float-end">
 			<input type="button" class="btn btn-primary btn-sm "
-				value="Related Vendors" /> <input type="button" class="btn btn-primary btn-sm"
-				value="Related Consultants" />  <input type="button"
-				class="btn btn-secondary btn-sm" value="Edit" /> <input
+				value="Related Clients" /> <input type="button" class="btn btn-primary btn-sm"
+				value="Related Consultants" />  <a href="/updateVendor/{{vendor.id}}"><input type="button"
+				class="btn btn-secondary btn-sm" value="Edit" /></a> <input
 				type="button" data-ng-click="deleteVendor(vendor.id)"
 				class="btn btn-danger btn-sm" value="delete" /></span> </li>
 		</ul>
 	</div>
-
-
 </body>
 </html>

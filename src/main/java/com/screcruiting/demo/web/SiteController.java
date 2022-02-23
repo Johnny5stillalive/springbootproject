@@ -95,6 +95,21 @@ public class SiteController {
 	public String addResumeSubmission() {
 		return "addSubmission.html";
 	}
+	
+	@GetMapping(path = "/updateClient/{clientId}")
+	public String updateClient() {
+		return "updateClient.html";
+	}
+	
+	@GetMapping(path = "/updateConsultant/{consultantId}")
+	public String updateConsultant() {
+		return "updateConsultant.html";
+	}
+	
+	@GetMapping(path = "/updateVendor/{vendorId}")
+	public String updateVendor() {
+		return "updateVendor.html";
+	}
 
 	/////////////////////////////////////////////////////////////
 	// ------------------------GET LIST------------------------//
@@ -193,14 +208,6 @@ public class SiteController {
 		return "Resume " + id + " deleted.";
 	}
 
-	// TODO
-	// get clients by resume
-	// get list of clients with vendor
-	// get list of consultants with vendor
-
-	// TODO Get a list of resumes by consultant id
-	// TODO Get a list of resumeSubmission for resume ID
-
 	/////////////////////////////////////////////////////////////
 	// -----------------------GET BY ID------------------------//
 	/////////////////////////////////////////////////////////////
@@ -274,9 +281,8 @@ public class SiteController {
 	}
 
 	@PostMapping(path = "/addResumeSubmission")
-	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam String date, @RequestParam int vendorID,
-			@RequestParam int clientID) {
-		
+	public @ResponseBody String addNewResumeSubmission(@RequestParam int resumeID, @RequestParam String date,
+			@RequestParam int vendorID, @RequestParam int clientID) {
 		Date sqlDate = Date.valueOf(date);
 		Resume resume = resumeService.getResumeById(resumeID);
 		Vendor vendor = vendorService.getVendorById(vendorID);
@@ -302,7 +308,7 @@ public class SiteController {
 
 	@PostMapping(path = "/deleteResumeSubmission")
 	public @ResponseBody String deleteResumeSubmission(@RequestParam int id) {
-		// TODO make sure the vendor exists before trying to delete
+		// TODO make sure the ResumeSubmission exists before trying to delete
 		resumeSubmissionService.deleteResumeSubmission(id);
 		return "ResumeSubmission " + id + " deleted.";
 	}
@@ -311,9 +317,40 @@ public class SiteController {
 	// -------------------SPECIALIZED METHODS------------------//
 	/////////////////////////////////////////////////////////////
 
-	// Not finished at alllllll
+	@GetMapping(path = "/getClientByResumeSubmissionId")
+	public @ResponseBody Client getClientByResumeSubmissionId(@RequestParam int id) {
+		return clientService.getClientByResumeSubmissionId(id);
+	} // get list of clients with vendor
+
+	@GetMapping(path = "/getClientListbyResumeId")
+	public @ResponseBody Iterable<Client> getClientListByResumeId(@RequestParam int id) {
+		return clientService.getClientListByResumeId(id);
+	}
+
+	@GetMapping(path = "/getClientListByVendorId")
+	public @ResponseBody Iterable<Client> getClientListByVendorId(@RequestParam int id) {
+		return clientService.getClientListByVendorId(id);
+	}
+
+	// get list of consultants with vendor ID
+	@GetMapping(path = "/getConsultantListByVendorId")
+	public @ResponseBody Iterable<Consultant> getConsultantListByVendorId(@RequestParam int id) {
+		return consultantService.getConsultantListByVendorId(id);
+	}
+
 	@GetMapping(path = "/getAllClientByResumeID")
 	public @ResponseBody Iterable<Client> getAllClientByResumeId(@RequestParam int id) {
 		return clientService.listAllClientByResumeId(id);
+	}
+
+	@GetMapping(path = "/getResumeListByConsultantId")
+	public @ResponseBody Iterable<Resume> getResumeListByConsultantId(@RequestParam int id) {
+		return consultantService.getResumeListByConsultantId(id);
+	}
+
+	
+	@GetMapping(path = "/getResumeSubmissionListByResumeId")
+	public @ResponseBody Iterable<ResumeSubmission> getResumeSubmissionListByResumeId(@RequestParam int id) {
+		return resumeSubmissionService.getResumeSubmissionListByResumeId(id);
 	}
 }

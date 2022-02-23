@@ -14,6 +14,10 @@ public interface ClientService {
 	Client getClientById(int id);
 	String updateClient(int id, String name, String address, String contactInfo);
 	Iterable<Client> listAllClientByResumeId(int id);
+	Iterable<Client> getClientListByVendorId(int id);
+	Client getClientByResumeSubmissionId(int id);
+	Iterable<Client> getClientListByResumeId(int id);
+	
 	
 }
 

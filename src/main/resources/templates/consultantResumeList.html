@@ -14,9 +14,25 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/resumeData.js"></script>
+<script src="/js/script.js"></script>
 </head>
 
 <body data-ng-controller="MainCtrl">
+<div class="header">
+		<h1>
+			<span>Some Company</span>
+		</h1>
+	</div>
+
+	
+		<div id="navbar_top">
+			<div class="navbar">
+				<a href="/homePage">Home</a> <a href="/clientList">Clients</a> 
+				<a href="/consultantList" class="active">Consultants</a> 
+				<a href="/vendorList">Vendors</a> <a href="/" class="right">Logout</a>
+			</div>
+		</div>
+		<div>
 	<h1>
 		<b>Name: </b>{{consultant.name}}
 	</h1>
@@ -27,10 +43,14 @@
 			value="Add Resume" /></a>
 
 	</div>
+	
+	
+	</div>
+	
 	<ul class="w3-ul w3-card-4 w3-hoverable">
 		<li
 			data-ng-repeat="resume in resumes | filter:search | filter: resume.consultantIntID = consultantId">
-			</span><span><b>ID: </b> {{resume.id}}</span> <b>Type: </b> {{resume.type}}
+			<span><b>ID: </b> {{resume.id}}</span> <b>Type: </b> {{resume.type}}
 			<b>Content: </b> {{resume.content}} <span class="float-end"> <b>Submissions Count:
 		</b> {{resume.submissions.length}} <Label
 				class="px-2">View Submissions</Label><input class="px-2"
@@ -47,7 +67,7 @@
 					<li data-ng-hide="!myVar"
 						data-ng-repeat="resumeSubs in resume.submissions | filter:search">
 						<b> Client: </b>{{resumeSubs.clientName}}<b> Vendor: </b>
-						{{resumeSubs.vendorName}}</span> <span><b> Date: </b>
+						{{resumeSubs.vendorName}}<b> Date: </b>
 							{{resumeSubs.date}} 
 					</li>
 				</ul>

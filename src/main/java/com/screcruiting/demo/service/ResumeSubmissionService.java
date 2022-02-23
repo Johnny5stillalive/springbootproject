@@ -15,5 +15,7 @@ public interface ResumeSubmissionService {
 	void deleteResumeSubmission(int id);
 	ResumeSubmission getResumeSubmissionById(int id);
 	String updateResumeSubmission(int id, Resume resume, Vendor vendor, Client client);
+	Iterable<ResumeSubmission> getResumeSubmissionListByResumeId(int id);
+	
 
 }

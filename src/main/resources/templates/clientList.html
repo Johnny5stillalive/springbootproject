@@ -34,23 +34,22 @@
 				<a href="/" class="right">Logout</a>
 			</div>
 			<div class="text-center p-2">
-				
-					<input data-ng-model="search" type="text" placeholder="Search">
-					<a href="addClient"> <input type="button" value="Add Client" /></a>
-				
+
+				<input data-ng-model="search" type="text" placeholder="Search">
+				<a href="addClient"> <input type="button" value="Add Client" /></a>
+
 			</div>
 		</div>
 		<div>
 			<ul class="w3-ul w3-card-4 w3-hoverable">
-				<li data-ng-repeat="client in clients | filter:search"> 
-				<b>Name: </b> {{client.name}} <b> address:</b> {{client.address}} <b>Contact Info: </b>
-					{{client.contactInfo}}  <span
-					class="float-end"> <input type="button"
-						class="btn btn-primary btn-sm" value="Related Vendors" /> <input
-						type="button" class="btn btn-secondary btn-sm" value="Edit" /> <input
+				<li data-ng-repeat="client in clients | filter:search"><b>Name:
+				</b> {{client.name}} <b> address:</b> {{client.address}} <b>Contact
+						Info: </b> {{client.contactInfo}} <span class="float-end">  <input
+						type="button" class="btn btn-primary btn-sm"
+						value="Related Vendors" /> <a href="/updateClient/{{client.id}}"><input type="button" 
+						class="btn btn-secondary btn-sm" value="Edit" /> </a> <input
 						type="button" data-ng-click="deleteClient(client.id)"
-						class="btn btn-danger btn-sm" value="delete" /></span>
-				</li>
+						class="btn btn-danger btn-sm" value="delete" /></span></li>
 			</ul>
 		</div>
 	</div>
@@ -58,5 +57,5 @@
 
 </body>
 
-	
+
 </html>
