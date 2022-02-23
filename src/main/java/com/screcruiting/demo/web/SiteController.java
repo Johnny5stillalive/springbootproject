@@ -110,6 +110,21 @@ public class SiteController {
 	public String updateVendor() {
 		return "updateVendor.html";
 	}
+	
+	@GetMapping(path = "/vendorsToClient/{clientId}")
+	public String vendorToClient() {
+		return "vendorsRelatedToClient.html";
+	}
+	
+	@GetMapping(path = "/clientsRelatedToVendor/{vendorId}")
+	public String clientsToVendor() {
+		return "clientsRelatedToVendor.html";
+	}
+	
+	@GetMapping(path = "/consultantsRelatedToVendor/{vendorId}")
+	public String consultantsToVendor() {
+		return "consultantsRelatedToVendor.html";
+	}
 
 	/////////////////////////////////////////////////////////////
 	// ------------------------GET LIST------------------------//
