@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.screcruiting.dao.VendorDAO;
 import com.screcruiting.demo.entity.Client;
 import com.screcruiting.demo.entity.Consultant;
 import com.screcruiting.demo.entity.Resume;
@@ -116,6 +117,11 @@ public class SiteController {
 		return "vendorsRelatedToClient.html";
 	}
 	
+	@GetMapping(path = "/vendorsToConsultant/{consultantId}")
+	public String vendorsToConsultans() {
+		return "vendorsRelatedToConsultant.html";
+	}
+	
 	@GetMapping(path = "/clientsRelatedToVendor/{vendorId}")
 	public String clientsToVendor() {
 		return "clientsRelatedToVendor.html";
@@ -189,6 +195,14 @@ public class SiteController {
 
 		resumeService.saveResume(consultant, type, content);
 		return "Resume Saved";
+	}
+	
+	@PostMapping(path = "/addClientToVendorRelationship")
+	public @ResponseBody String addClientToVendorRelationship(@RequestParam int clientID, @RequestParam int vendorID) {
+		System.out.println("add client");
+
+		vendorService.addClientToVendorRelationship(clientID, vendorID);
+		return "Resume Relationship Saved";
 	}
 
 	/////////////////////////////////////////////////////////////
@@ -331,7 +345,18 @@ public class SiteController {
 	/////////////////////////////////////////////////////////////
 	// -------------------SPECIALIZED METHODS------------------//
 	/////////////////////////////////////////////////////////////
-
+	
+	@GetMapping(path = "/getVendorListByClientId")
+	public @ResponseBody Iterable<Vendor> getVendorListByClientId(@RequestParam int id){
+		return vendorService.getVendorListByClientId(id);
+	}
+	
+	@GetMapping(path = "/getVendorListByConsultantId")
+	public @ResponseBody Iterable<Vendor> getVendorListByConsultantId(@RequestParam int id){
+		return vendorService.getVendorListByConsultantId(id);
+	}
+	
+	
 	@GetMapping(path = "/getClientByResumeSubmissionId")
 	public @ResponseBody Client getClientByResumeSubmissionId(@RequestParam int id) {
 		return clientService.getClientByResumeSubmissionId(id);

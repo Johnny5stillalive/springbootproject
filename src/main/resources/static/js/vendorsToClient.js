@@ -17,4 +17,14 @@ var app = angular.module('vendorsToClientAPP', []);
 	
 	$http.get('http://localhost:8080/getClientById',{params:{id:$scope.clientId}}).success(onGetClientSuccess).error(onGetClientError);
 		
+		var onGetSuccess = function(data, status, headers, config) {
+			$scope.vendors = data;
+		};
+
+		var onGetError = function(data, status, headers, config) {
+			$scope.error = status;
+		}
+
+		$http.get('http://localhost:8080/getVendorListByClientId',{params:{id:$scope.clientId}}).success(onGetSuccess).error(onGetError);
+		
 			});

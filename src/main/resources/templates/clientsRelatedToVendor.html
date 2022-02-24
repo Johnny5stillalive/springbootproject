@@ -38,7 +38,17 @@
 	<div class="text-center p-2">
 
 		<input data-ng-model="search" type="text" placeholder="Search">
+		<select data-ng-model="clientSelect" data-live-search="true" data-live-search-style="startsWith" class="selectpicker" 
+            style="width:200px;">
 
+						<option value="">--Select Client--</option>
+
+						<option data-ng-repeat="client in clientsList | filter: client" 
+							value="{{client.id}}" >{{client.name}} </option>
+
+					</select>
+<input type="submit"
+				class="btn btn-primary btn-sm" value="Add Client Relationship" data-ng-click="addClientRelationship(clientSelect, vendorId)"/>
 	</div>
 	
 	

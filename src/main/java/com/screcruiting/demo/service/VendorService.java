@@ -13,4 +13,7 @@ public interface VendorService {
 	void deleteVendor(int id);
 	Vendor getVendorById(int id);
 	String updateVendor(int id, String name, String address, String contactInfo);
+	Iterable<Vendor> getVendorListByClientId(int id);
+	Iterable<Vendor> getVendorListByConsultantId(int id);
+	void addClientToVendorRelationship(int clientID, int vendorID);
 }

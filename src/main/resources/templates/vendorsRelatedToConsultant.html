@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="vendorsToClientAPP">
+<html lang="en" data-ng-app="vendorsToConsultantAPP">
 <head>
 <title>Consultant Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,11 +12,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-<script src="/js/vendorsToClient.js"></script>
+<script src="/js/vendorsToConsultant.js"></script>
 <script src="/js/script.js"></script>
 </head>
 
-<body data-ng-controller="clientController">
+<body data-ng-controller="consultantController">
 <div class="header">
 		<h1>
 			<span>Some Company</span>
@@ -26,14 +26,14 @@
 	
 		<div id="navbar_top">
 			<div class="navbar">
-				<a href="/homePage">Home</a> <a href="/clientList" class="active">Clients</a> 
-				<a href="/consultantList" >Consultants</a> 
+				<a href="/homePage">Home</a> <a href="/consultantList" >Consultants</a> 
+				<a href="/consultantList" class="active">Consultants</a> 
 				<a href="/vendorList">Vendors</a> <a href="/" class="right">Logout</a>
 			</div>
 		</div>
 		<div>
 	<h1>
-		<b>Name: </b>{{client.name}}
+		<b>Name: </b>{{consultant.name}}
 	</h1>
 	<div class="text-center p-2">
 

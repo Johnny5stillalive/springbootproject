@@ -94,17 +94,19 @@ public class ClientServiceImpl implements ClientService {
 
 		Set<Client> clientList = vendorDAO.getVendorByID(id).getClients();
 
-		// Set seems to give issues. let's use arraylist. Let's attempt to get it
-		// working
-		// via brute force until we can refine it.
-		Iterator<Client> iter = clientList.iterator();
-		ArrayList<Client> myList = new ArrayList<Client>();
-
-		while (iter.hasNext()) {
-			myList.add(iter.next());
-		}
-
-		return () -> myList.iterator();
+		return clientList;
+		
+//		// Set seems to give issues. let's use arraylist. Let's attempt to get it
+//		// working
+//		// via brute force until we can refine it.
+//		Iterator<Client> iter = clientList.iterator();
+//		ArrayList<Client> myList = new ArrayList<Client>();
+//
+//		while (iter.hasNext()) {
+//			myList.add(iter.next());
+//		}
+//
+//		return () -> myList.iterator();
 
 	}
 
