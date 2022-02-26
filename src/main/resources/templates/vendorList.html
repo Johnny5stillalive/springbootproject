@@ -43,7 +43,7 @@
 			</div>
 		<ul class="w3-ul w3-card-4 w3-hoverable">
 			<li data-ng-repeat="vendor in vendors | filter:search" > <b>Name: </b> {{vendor.name}} <b>Contact Info: </b>
-				{{vendor.contactInfo}} <b> address:</b> {{vendor.address}}
+				{{vendor.contactInfo}} <b> Address:</b> {{vendor.address}}
 				 <span class="float-end">
 			<a href="/clientsRelatedToVendor/{{vendor.id}}"><input type="button" class="btn btn-primary btn-sm "
 				value="Related Clients" /></a> <a href="/consultantsRelatedToVendor/{{vendor.id}}"><input type="button" class="btn btn-primary btn-sm"

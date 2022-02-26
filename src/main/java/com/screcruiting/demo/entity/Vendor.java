@@ -43,21 +43,21 @@ public class Vendor implements  Serializable
 	private String contactInfo;
 	
 	@JsonIgnore
-	@ManyToMany(targetEntity= Client.class, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(targetEntity= Client.class, fetch = FetchType.LAZY)
 	@JoinTable(name="vendor_client",
 	joinColumns=@JoinColumn(name="vendor_id"), 
 	inverseJoinColumns=@JoinColumn(name="client_id"))
 	private Set<Client> clients;
 	
 	@JsonIgnore
-	@ManyToMany(targetEntity= Consultant.class, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(targetEntity= Consultant.class,  fetch = FetchType.LAZY)
 	@JoinTable(name="vendor_consultant",
 	joinColumns=@JoinColumn(name="vendor_id"), 
 	inverseJoinColumns=@JoinColumn(name="consultant_id"))
 	private Set<Consultant> consultants;
 
 	@JsonIgnore
-	@OneToMany(mappedBy="vendor", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="vendor", fetch = FetchType.LAZY)
 	private Set<ResumeSubmission> resumeSubmissions;
 
 	public int getId() {

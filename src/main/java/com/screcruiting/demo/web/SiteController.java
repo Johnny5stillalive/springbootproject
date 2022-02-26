@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.screcruiting.dao.VendorDAO;
 import com.screcruiting.demo.entity.Client;
 import com.screcruiting.demo.entity.Consultant;
 import com.screcruiting.demo.entity.Resume;
@@ -199,9 +198,16 @@ public class SiteController {
 	
 	@PostMapping(path = "/addClientToVendorRelationship")
 	public @ResponseBody String addClientToVendorRelationship(@RequestParam int clientID, @RequestParam int vendorID) {
-		System.out.println("add client");
+		
 
 		vendorService.addClientToVendorRelationship(clientID, vendorID);
+		return "Resume Relationship Saved";
+	}
+	
+	@PostMapping(path = "/addConsultantToVendorRelationship")
+	public @ResponseBody String addConsultantToVendorRelationship(@RequestParam int consultantID, @RequestParam int vendorID) {
+
+		vendorService.addConsultantToVendorRelationship(consultantID, vendorID);
 		return "Resume Relationship Saved";
 	}
 

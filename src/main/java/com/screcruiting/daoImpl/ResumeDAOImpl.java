@@ -18,7 +18,6 @@ public class ResumeDAOImpl implements ResumeDAO {
 
 	@Override
 	public void saveOrUpdateResume(Resume resume) {
-		System.out.println("Resume Saved or Updated.");
 		resumeRepository.save(resume);
 
 	}

@@ -44,7 +44,7 @@
 		<ul class="w3-ul w3-card-4 w3-hoverable">
 			<li data-ng-repeat="consultant in consultants | filter:search">
 				 <b>Name: </b>{{consultant.name}} <b>Contact Info: </b> {{consultant.contactInfo}}
-				<b> address:</b> {{consultant.address}} <span class="float-end">
+				<b> Address:</b> {{consultant.address}} <span class="float-end">
 					<a href="consultantResumeList/{{consultant.id}}"><input type="button" class="btn btn-primary btn-sm"
 					value="View Resumes" /></a> <a href="vendorsToConsultant/{{consultant.id}}"><input type="button"
 					class="btn btn-primary btn-sm" value="Related Vendors" /></a> <a href="/updateConsultant/{{consultant.id}}"><input

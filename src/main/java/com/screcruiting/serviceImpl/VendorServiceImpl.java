@@ -84,7 +84,7 @@ public class VendorServiceImpl implements VendorService{
 
 	@Override
 	public Iterable<Vendor> getVendorListByClientId(int id) {
-//		Set<Client> clientList = vendorDAO.getVendorByID(id).getClients();
+
 		Iterable<Vendor> vendorList = listAllVendor();
 		ArrayList<Vendor> myList = new ArrayList<Vendor>();
 		
@@ -129,6 +129,19 @@ public class VendorServiceImpl implements VendorService{
 		clientList.add(clientDAO.getClientByID(clientID));
 		tempVendor.setClients(clientList);
 		vendorDAO.saveorUpdateVendor(tempVendor);
+	}
+
+
+
+
+	@Override
+	public void addConsultantToVendorRelationship(int consultantID, int vendorID) {
+		Vendor tempVendor = vendorDAO.getVendorByID(vendorID);
+		Set<Consultant> consultantList = tempVendor.getConsultants();
+		consultantList.add(consultantDAO.getConsultantById(consultantID));
+		tempVendor.setConsultants(consultantList);
+		vendorDAO.saveorUpdateVendor(tempVendor);
+		
 	}
 
 	

@@ -16,4 +16,5 @@ public interface VendorService {
 	Iterable<Vendor> getVendorListByClientId(int id);
 	Iterable<Vendor> getVendorListByConsultantId(int id);
 	void addClientToVendorRelationship(int clientID, int vendorID);
+	void addConsultantToVendorRelationship(int consultantID, int vendorID);
 }

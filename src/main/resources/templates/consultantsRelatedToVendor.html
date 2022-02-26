@@ -38,6 +38,17 @@
 	<div class="text-center p-2">
 
 		<input data-ng-model="search" type="text" placeholder="Search">
+		<select data-ng-model="consultantSelect" data-live-search="true" data-live-search-style="startsWith" class="selectpicker" 
+            style="width:200px;">
+
+						<option value="">--Select Consultant--</option>
+
+						<option data-ng-repeat="consultant in consultants | filter: consultant" 
+							value="{{consultant.id}}" >{{consultant.name}} </option>
+
+					</select>
+<input type="submit"
+				class="btn btn-primary btn-sm" value="Add Consultant Relationship" data-ng-click="addConsultantRelationship(consultantSelect, vendorId)"/>
 
 	</div>
 	
@@ -46,7 +57,7 @@
 	
 	<ul class="w3-ul w3-card-4 w3-hoverable">
 		<li
-			data-ng-repeat="consultant in consultants | filter:search">
+			data-ng-repeat="consultant in consultantsById | filter:search">
 			<span><b>ID: </b> {{consultant.id}}</span> <b>Client: </b> {{consultant.name}}
 			<b>Address: </b> {{consultant.address}} <b>Contact Info: </b> {{consultant.contactInfo}}
 		</li>

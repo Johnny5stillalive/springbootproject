@@ -29,8 +29,13 @@
     <label for="inputContent">Content</label>
     <input type="text" class="form-control" data-ng-model="inputContent" placeholder="Content">
   </div>
+  <br/>
+  <div >
+    <input type="file" name="fileMedia" id="fileMedia" data-ng-model="file">
+</div>
+  <br/>
   </div>
-  <button type="submit" class="btn btn-primary" data-ng-click="addResume(consultantId, inputType, inputContent)">Add Resume</button>
+  <button type="submit" class="btn btn-primary" data-ng-click="addResume(consultantId, inputType, inputContent, file)">Add Resume</button>
   <a href="/consultantResumeList/{{consultantId}}" class="active"><input type="button" class="btn btn-secondary" value="Consultant Resume List"/></a>
 </form>
 </body>

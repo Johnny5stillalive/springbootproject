@@ -3,6 +3,7 @@
 <head>
 <title>Client Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link
@@ -43,7 +44,7 @@
 		<div>
 			<ul class="w3-ul w3-card-4 w3-hoverable">
 				<li data-ng-repeat="client in clients | filter:search"><b>Name:
-				</b> {{client.name}} <b> address:</b> {{client.address}} <b>Contact
+				</b> {{client.name}} <b> Address:</b> {{client.address}} <b>Contact
 						Info: </b> {{client.contactInfo}} <span class="float-end">  <a href="/vendorsToClient/{{client.id}}"><input
 						type="button" class="btn btn-primary btn-sm"
 						value="Related Vendors" /> </a><a href="/updateClient/{{client.id}}"><input type="button" 
